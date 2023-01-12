@@ -148,8 +148,16 @@ function appMenu() {
             });
     }
 
+    function buildTeam() {
+        if (!fs.existsSync(DIST_DIR)) {
+            fs.mkdirSync(DIST_DIR);
+        }
+        fs.writeFileSync(distPath, render(teamMembers), 'utf-8');
+    }
+    createManager();
+}
 
-};
+appMenu();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
