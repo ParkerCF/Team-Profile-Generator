@@ -29,12 +29,18 @@ function appMenu() {
                 },
                 {
                     type: 'input',
+                    name: 'managerId',
+                    message: "What is the manager's id?"
+
+                },
+                {
+                    type: 'input',
                     name: 'managerEmail',
                     message: "What is the manager's email?",
                     },
                 {
                     type: 'input',
-                    name: 'managerOfficeNmber',
+                    name: 'managerOfficeNumber',
                     message: "What is the manager's office number?",
                 },
             ])
@@ -100,7 +106,7 @@ function appMenu() {
                 {
                     type: 'input',
                     name: 'engineerGithub',
-                    message: "what is the engineer's GitHub username>",
+                    message: "what is the engineer's GitHub username?",
                 },
             ])
             .then((answers) => {
@@ -128,6 +134,12 @@ function appMenu() {
                     type: 'input',
                     name: 'internId',
                     message: "What is the intern's id?",
+                },
+                {
+                    type: 'input',
+                    name: 'internEmail',
+                    message: "What is the intern's email?"
+
                 },
                 {
                     type: 'input',
