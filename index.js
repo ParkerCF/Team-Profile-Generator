@@ -116,7 +116,39 @@ function appMenu() {
             });
     }
 
-    
+    function addIntern() {
+        inquirer
+            .prompt([
+                {
+                    type: 'input',
+                    name: 'internName',
+                    message: "What is the intern's name?",
+                },
+                {
+                    type: 'input',
+                    name: 'internId',
+                    message: "What is the intern's id?",
+                },
+                {
+                    type: 'input',
+                    name: 'internSchool',
+                    message: "Where does the intern go to school?",
+                },
+            ])
+            .then((answers) => {
+                const intern = new Intern (
+                    answers.internName,
+                    answers.internId,
+                    answers.internEmail,
+                    answers.internSchool
+                );
+                teamMembers.push(intern);
+                idArray.push(answers.internId);
+                createTeam();
+            });
+    }
+
+
 };
 
 // Write code to use inquirer to gather information about the development team members,
