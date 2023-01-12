@@ -38,8 +38,20 @@ function appMenu() {
                     message: "What is the manager's office number?",
                 },
             ])
-            
+            .then((answers) => {
+                const manager = new Manager(
+                    answers.managerName,
+                    answers.managerId, 
+                    answers.managerEmail,
+                    answers.managerOfficeNumber
+                );
+                teamMembers.push(manager);
+                idArray.push(answers.managerId);
+                createTeam();
+            });
     }
+
+    
 };
 
 // Write code to use inquirer to gather information about the development team members,
