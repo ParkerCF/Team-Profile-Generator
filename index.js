@@ -79,6 +79,43 @@ function appMenu() {
             });
     }
 
+    function addEngineer() {
+        inquirer
+            .prompt([
+                {
+                    typoe: 'input',
+                    name: 'engineerName',
+                    message: "What is the name of the engineer?",
+                },
+                {
+                    type: 'input',
+                    name: 'engineerId',
+                    message: "What is the id of the engineer?",
+                },
+                {
+                    type: 'input',
+                    name: 'engineerEmail',
+                    message: "What is the engineer's email address?",
+                },
+                {
+                    type: 'input',
+                    name: 'engineerGithub',
+                    message: "what is the engineer's GitHub username>",
+                },
+            ])
+            .then((answers) => {
+                const engineer = new Engineer(
+                    answers.engineerName,
+                    answers.engineerId,
+                    answers.engineerEmail,
+                    answers.engineerGitHub
+                );
+                teamMembers.push(engineer);
+                idArray.push(answers.engineerId);
+                createTeam();
+            });
+    }
+
     
 };
 
