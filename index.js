@@ -51,6 +51,34 @@ function appMenu() {
             });
     }
 
+    function createTeam() {
+        inquirer
+            .prompt([
+                {
+                    type: 'list',
+                    name: 'memberChoice',
+                    message: 'Which team member is next?',
+                    choices: [
+                        'Engineer',
+                        'Intern',
+                        "No more team members to add",
+                    ],
+                },
+            ])
+            .then((userChoice) => {
+                switch (userChoice.memberChoice) {
+                    case 'Engineer':
+                        addEngineer();
+                        break;
+                    case 'Intern':
+                        addIntern();
+                        break;
+                    default:
+                        buildTeam();
+                }
+            });
+    }
+
     
 };
 
