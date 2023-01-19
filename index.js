@@ -85,8 +85,7 @@ function builder() {
         })
     }
 
-    function writeTeam() {
-        // Create the output directory if the dist path doesn't exist
+    function writeTeamHTML() {
         if (!fs.existsSync(DIST_DIR)) {
           fs.mkdirSync(DIST_DIR);
         }
@@ -101,5 +100,5 @@ builder()
         return render(teamMembers);
       })
       .then((html) => {
-        return writeTeam()
+        return writeTeamHTML()
       });
