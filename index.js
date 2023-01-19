@@ -10,6 +10,7 @@ const DIST_DIR = path.resolve(__dirname, "dist");
 const distPath = path.join(DIST_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+
 console.log('Please follow the prompts to build your Team.');
 
 const teamMembers = [];
@@ -48,6 +49,13 @@ function builder() {
                 },
                 {
                     type: 'input',
+                    name: 'github',
+                    message: `What is the engineer's Github username?`,
+                    when: (answers) => answers.role === 'Engineer',
+
+                },
+                {
+                    type: 'input',
                     name: 'school',
                     message: `Where does the intern go to school?`,
                     when: (answers) => answers.role === 'Intern',
@@ -59,33 +67,31 @@ function builder() {
                 },
             ])
             .then((answers) => {
-                let emoloyee;
+                let employee;
             if (answers.role === 'Manager') {
-                employee = new Manager(answers.name, ansewrs.id, answers.email, answers.officeNumer);
+                employee = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
             } else if (answers.role === 'Engineer') {
-                emoloyee = new Engineer(ansewrs.name, answers.id, answers.email, answers.github);
+                employee = new Engineer(answers.name, answers.id, answers.email, answers.github);
             } else if (answers.role === 'Intern') {
                 employee = new Intern(answers.name, answers.id, answers.email, answers.school);
             }
 
             teamMembers.push(employee);
             if (answers.addEmployee) {
-                return questions();
+                return builder();
             } else {
                 return teamMembers;
             }
         })
     }
 
-    function buildTeam() {
+    function writeTeam() {
         // Create the output directory if the dist path doesn't exist
         if (!fs.existsSync(DIST_DIR)) {
           fs.mkdirSync(DIST_DIR);
         }
         fs.writeFileSync(distPath, render(teamMembers), 'utf-8');
       }
-    
-      createManager();
     
 
 
@@ -95,5 +101,5 @@ builder()
         return render(teamMembers);
       })
       .then((html) => {
-        return buildTeam()
+        return writeTeam()
       });
