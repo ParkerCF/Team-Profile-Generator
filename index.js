@@ -68,16 +68,32 @@ function builder() {
                 employee = new Intern(answers.name, answers.id, answers.email, answers.school);
             }
 
-            emoloyees.push(employee);
+            teamMembers.push(employee);
             if (answers.addEmployee) {
                 return questions();
             } else {
-                return employees;
+                return teamMembers;
             }
         })
     }
 
+    function buildTeam() {
+        // Create the output directory if the dist path doesn't exist
+        if (!fs.existsSync(DIST_DIR)) {
+          fs.mkdirSync(DIST_DIR);
+        }
+        fs.writeFileSync(distPath, render(teamMembers), 'utf-8');
+      }
+    
+      createManager();
+    
 
 
 
-appMenu();
+builder()
+      .then((teamMembers) => {
+        return render(teamMembers);
+      })
+      .then((html) => {
+        return buildTeam()
+      });
